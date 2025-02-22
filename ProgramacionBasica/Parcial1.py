@@ -22,4 +22,22 @@ def requisitos():
             print(f"{lib} instalada correctamente ✅")
 
 # Llamamos a la función para instalar las librerías necesarias
-requisitos()
+#requisitos()
+
+##### Funciones abstractas:
+
+
+def invertir_cadena(cadena):
+    pass  # Completa esta función
+
+
+
+
+def p1_check():
+    try: 
+        assert invertir_cadena("hola") == "aloh"
+        assert invertir_cadena("Python") == "nohtyP"
+    except AssertionError:
+        print("❌ La cadena no se invierte correctamente")
+    else:
+        print("✅ La cadena se invierte correctamente")
