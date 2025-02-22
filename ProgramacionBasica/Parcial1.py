@@ -22,4 +22,4 @@ def requisitos():
             print(f"{lib} instalada correctamente ✅")
 
 # Llamamos a la función para instalar las librerías necesarias
-#requisitos()
+requisitos()
