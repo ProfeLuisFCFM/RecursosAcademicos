@@ -1,12 +1,12 @@
-import subprocess
-import sys
+import subprocess, sys
+from abc import ABC, abstractmethod
 
-libraries = [
-    'wget',
-    'pyqrcode'
-]
 
 def requisitos():
+    libraries = [
+        'wget',
+        'pyqrcode'
+    ]
     for lib in libraries:
         try:
             # Intentamos importar la librería
@@ -19,20 +19,19 @@ def requisitos():
             print(f"{lib} instalada correctamente ✅")
 
 
-# Función vacía o abstracta
-def invertir_cadena(cadena):
-    pass
+class problem1(ABC):
+    @abstractmethod
+    def invertir_cadena(self,cadena):
+        pass
 
-
-# Función de revisión
-def p1_check():
-    if invertir_cadena("hola") != "aloh":
-        print("❌ Error: La cadena 'hola' no se invierte correctamente")
-        print(f"Resultado: {invertir_cadena('hola')}")
-    
-    elif invertir_cadena("Python") != "nohtyP":
-        print("❌ Error: La cadena 'Python' no se invierte correctamente")
-        print(f"Resultado: {invertir_cadena('Python')}")
-    
-    else:
-        print("✅ La cadena se invierte correctamente")
+    def check(self):
+        if self.invertir_cadena("hola") != "aloh":
+            print("❌ Error: La cadena 'hola' no se invierte correctamente")
+            print(f"Resultado: {self.invertir_cadena('hola')}")
+        
+        elif self.invertir_cadena("Python") != "nohtyP":
+            print("❌ Error: La cadena 'Python' no se invierte correctamente")
+            print(f"Resultado: {self.invertir_cadena('Python')}")
+        
+        else:
+            print("✅ La cadena se invierte correctamente")
