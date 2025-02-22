@@ -4,7 +4,6 @@ from abc import ABC, abstractmethod
 
 def requisitos():
     libraries = [
-        'wget',
         'pyqrcode'
     ]
     for lib in libraries:
@@ -17,8 +16,10 @@ def requisitos():
             print(f"Instalando {lib}...")
             subprocess.check_call([sys.executable, "-m", "pip", "install", lib])
             print(f"{lib} instalada correctamente ✅")
+    print("✅ Verificación de requisitos completada.")
 
-# Parcial1.py
+requisitos()
+
 
 class p1(ABC):
 
