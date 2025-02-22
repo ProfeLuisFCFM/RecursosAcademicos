@@ -1,4 +1,3 @@
-import os
 import subprocess
 import sys
 
@@ -22,22 +21,19 @@ def requisitos():
             print(f"{lib} instalada correctamente ✅")
 
 # Llamamos a la función para instalar las librerías necesarias
-#requisitos()
 
-##### Funciones abstractas:
-
-
+# Función vacía o abstracta
 def invertir_cadena(cadena):
-    pass  # Completa esta función
+    pass
 
-
-
-
+# Función p1_check dentro de Parcial1.py que imprime el error si hay una excepción
 def p1_check():
     try: 
+        # Llamamos a la función invertir_cadena (que puede ser redefinida en el Notebook)
         assert invertir_cadena("hola") == "aloh"
         assert invertir_cadena("Python") == "nohtyP"
-    except AssertionError:
-        print("❌ La cadena no se invierte correctamente")
+    except AssertionError as e:
+        print("❌ Error: La cadena no se invierte correctamente")
+        print(f"Detalle del error: {str(e)}")  # Imprime el detalle de la excepción
     else:
         print("✅ La cadena se invierte correctamente")
