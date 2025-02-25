@@ -1,5 +1,4 @@
-import os
-import json
+import os, json, time
 
 def verificar_comandos():
 
@@ -45,7 +44,8 @@ def verificar_comandos():
             "matricula": matricula,
             "grupo": grupo
         },
-        "respuestas": resultados
+        "respuestas": resultados,
+        "fecha": int(time.time())
     }
     # Guardar resultados en JSON
     with open("resultados.json", "w") as f:
