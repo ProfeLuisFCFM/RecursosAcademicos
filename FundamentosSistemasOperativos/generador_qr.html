@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de QR</title>
+  <script src="qrcode.min.js"></script>  <!-- Incluye el archivo qrcode.min.js -->
+</head>
+<body>
+  <h2>Generador de QR para Examen</h2>
+  <p>Genera un código QR con los datos del examen:</p>
+
+  <!-- Botón para seleccionar el archivo JSON -->
+  <input type="file" id="jsonFile" accept=".json">
+  <br><br>
+
+  <!-- Contenedor donde se mostrará el QR -->
+  <div id="qrcode"></div>
+
+  <script>
+    // Función para generar el QR
+    function generarQR(data) {
+      const jsonData = JSON.stringify(data);
+      // Generar el QR en el contenedor con id "qrcode"
+      new QRCode(document.getElementById("qrcode"), {
+        text: jsonData,
+        width: 256,
+        height: 256,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+
+    // Event listener para cuando se selecciona un archivo
+    document.getElementById("jsonFile").addEventListener("change", function(event) {
+      const file = event.target.files[0];  // Obtener el archivo seleccionado
+      if (file && file.name.endsWith('.json')) {
+        const reader = new FileReader();
+        
+        // Leer el archivo como JSON
+        reader.onload = function(e) {
+          try {
+            const data = JSON.parse(e.target.result);  // Parsear el contenido del archivo
+            generarQR(data);  // Generar el QR con los datos del archivo
+          } catch (error) {
+            alert("Error al leer el archivo JSON.");
+          }
+        };
+
+        // Leer el archivo seleccionado
+        reader.readAsText(file);
+      } else {
+        alert("Por favor, selecciona un archivo .json.");
+      }
+    });
+  </script>
+</body>
+</html>
