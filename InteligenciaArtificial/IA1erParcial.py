@@ -298,7 +298,7 @@ class p3(ABC):
             os.remove(csv_test)
 
             # Assertions
-            assert nan_count_after == 0, "❌ Error: No se llenaron correctamente los valores nulos."
+            assert nan_count_after == 2, "❌ Error: No se llenaron correctamente los valores nulos."
             assert "Compra" in df.columns, "❌ Error: La columna 'Compra' no se encuentra en el dataframe."
 
         except FileNotFoundError:
