@@ -1,5 +1,6 @@
 import sys, subprocess, os
 import pandas as pd
+import matplotlib.pyplot as plt
 from abc import ABC, abstractmethod
 from google.colab import files
 from IPython.display import display
@@ -27,8 +28,6 @@ def requisitos():
             print(f"{lib} instalada correctamente ✅")
     
     # Ahora importamos todas las librerías necesarias
-    import pandas as pd
-    import matplotlib.pyplot as plt
     from sklearn.model_selection import train_test_split
     from sklearn.linear_model import LogisticRegression
     from sklearn.ensemble import RandomForestClassifier
