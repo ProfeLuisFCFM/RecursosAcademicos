@@ -1,4 +1,4 @@
-import subprocess, sys, time, qrcode
+import subprocess, sys, time
 from abc import ABC, abstractmethod
 from google.colab import files
 
