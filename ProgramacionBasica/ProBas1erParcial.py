@@ -1,10 +1,10 @@
-import subprocess, sys, time, qrcode
+import subprocess, sys, time, pyqrcode
 from abc import ABC, abstractmethod
 from google.colab import files
 
 def requisitos():
     libraries = [
-        'qrcode'
+        'pyqrcode'
     ]
     for lib in libraries:
         try:
