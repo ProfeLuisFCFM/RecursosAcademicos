@@ -1,7 +1,6 @@
 import subprocess, sys
 from abc import ABC, abstractmethod
 
-
 def requisitos():
     libraries = [
         'pyqrcode'
@@ -74,9 +73,6 @@ class p2(ABC):
     def hint():
         print("Debes generar una función llamada 'es_primo', que reciba una variable int() y despues debes retornar True si es primo o False si no lo es. \n Por ejemplo: 7 es primo \n             9 no es primo")
 
-
-
-
 class p3(ABC):
 
     @abstractmethod
@@ -87,14 +83,14 @@ class p3(ABC):
     def check():
         try:
             espacio_usuario = get_ipython().user_ns
-            if "es_primo" not in espacio_usuario:
-                raise NameError("⚠️ No se encontró la función 'es_primo'.")
-            funcion_usuario = espacio_usuario["es_primo"]
-            assert funcion_usuario(2) == True
-            assert funcion_usuario(4) == False
-            assert funcion_usuario(17) == True
+            if "factorial" not in espacio_usuario:
+                raise NameError("⚠️ No se encontró la función 'factorial'.")
+            funcion_usuario = espacio_usuario["factorial"]
+            assert funcion_usuario(5) == 120
+            assert funcion_usuario(0) == 1
+            assert funcion_usuario(3) == 6
         except AssertionError:
-            print("❌ Error en la función es_primo.")
+            print("❌ Error en la función factorial.")
         except Exception as e:
             print(f"❌ Error: {e}")
         else:
@@ -102,23 +98,43 @@ class p3(ABC):
 
     @staticmethod
     def hint():
-        print("Debes generar una función llamada 'es_primo', que reciba una variable int() y despues debes retornar True si es primo o False si no lo es. \n Por ejemplo: 7 es primo \n             9 no es primo")
-
-
-# Problema 3: Factorial de un número
-print("\n# Problema 3: Escribe una función que calcule el factorial de un número.")
-def factorial(n):
-    pass  # Completa esta función
-
-# Pruebas
-assert factorial(5) == 120
-assert factorial(0) == 1
-assert factorial(3) == 6
+        print("Debes generar una función llamada 'factorial', que reciba una variable int() y despues debes retornar el valor de la multiplicación de n * (n-1) * (n-2) * ... * (1). \n Por ejemplo: factorial de 3 -> 6 \n             factorial de 0 -> 1")
 
 
 
-# Problema 5: Fibonacci
-print("\n# Problema 5: Escribe una función que retorne los primeros N números de la serie Fibonacci.")
+class p4(ABC):
+
+    @abstractmethod
+    def fibonacci(self, n):
+        pass
+
+    @staticmethod
+    def check():
+        try:
+            espacio_usuario = get_ipython().user_ns
+            if "fibonacci" not in espacio_usuario:
+                raise NameError("⚠️ No se encontró la función 'fibonacci'.")
+            funcion_usuario = espacio_usuario["fibonacci"]
+            assert funcion_usuario(5) == 120
+            assert funcion_usuario(0) == 1
+            assert funcion_usuario(3) == 6
+        except AssertionError:
+            print("❌ Error en la función fibonacci.")
+        except Exception as e:
+            print(f"❌ Error: {e}")
+        else:
+            print("✅ Función correcta.")
+
+    @staticmethod
+    def hint():
+        print("Debes generar una función llamada 'fibonacci', que reciba una variable int() y despues debes retornar el valor de la multiplicación de n * (n-1) * (n-2) * ... * (1). \n Por ejemplo: factorial de 3 -> 6 \n             factorial de 0 -> 1")
+
+
+
+
+
+# Problema 4: Fibonacci
+print("\n# Problema 4: Escribe una función que retorne los primeros N números de la serie Fibonacci.")
 def fibonacci(n):
     pass  # Completa esta función
 
@@ -126,8 +142,8 @@ def fibonacci(n):
 assert fibonacci(5) == [0, 1, 1, 2, 3]
 assert fibonacci(7) == [0, 1, 1, 2, 3, 5, 8]
 
-# Problema 6: Palíndromos
-print("\n# Problema 6: Escribe una función que determine si una palabra es un palíndromo.")
+# Problema 5: Palíndromos
+print("\n# Problema 5: Escribe una función que determine si una palabra es un palíndromo.")
 def es_palindromo(palabra):
     pass  # Completa esta función
 
@@ -135,3 +151,14 @@ def es_palindromo(palabra):
 assert es_palindromo("oso") == True
 assert es_palindromo("python") == False
 assert es_palindromo("ana") == True
+
+
+# Problema 6: Suma de dígitos
+print("\n# Problema 6: Escribe una función que calcule la suma de los dígitos de un número entero positivo.")
+def suma_digitos(numero):
+    pass  # Completa esta función
+
+# Pruebas
+assert suma_digitos(123) == 6
+assert suma_digitos(456) == 15
+assert suma_digitos(789) == 24
