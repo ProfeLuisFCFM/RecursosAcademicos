@@ -21,7 +21,7 @@ def requisitos():
 requisitos()
 
 def QR_Generator():
-        # Obtener variables del espacio de nombres en Colab
+    import qrcode 
     espacio_usuario = get_ipython().user_ns
 
     try:
