@@ -1,9 +1,10 @@
-import subprocess, sys
+import subprocess, sys, time, qrcode
 from abc import ABC, abstractmethod
+from google.colab import files
 
 def requisitos():
     libraries = [
-        'pyqrcode'
+        'qrcode'
     ]
     for lib in libraries:
         try:
@@ -18,6 +19,26 @@ def requisitos():
     print("✅ Verificación de requisitos completada.")
 
 requisitos()
+
+
+def QR_Generator():
+    resultados = {}
+    examen = {
+        "datos_alumno": {
+            "nombre": Nombre,
+            "matricula": Matricula,
+            "grupo": Grupo
+        },
+        "respuestas": resultados,
+        "fecha": int(time.time())
+    }
+    qr = qrcode.make(examen)
+    output_filename = "qr_resultados.png"
+    qr.save(output_filename)
+    print(f"Código QR generado y guardado como {output_filename}")
+    files.download('qr_resultados.png')
+
+
 
 class p1(ABC):
 
