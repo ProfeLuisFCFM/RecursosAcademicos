@@ -19,7 +19,6 @@ def requisitos():
 
 requisitos()
 
-
 class p1(ABC):
 
     @abstractmethod
@@ -100,8 +99,6 @@ class p3(ABC):
     def hint():
         print("Debes generar una función llamada 'factorial', que reciba una variable int() y despues debes retornar el valor de la multiplicación de n * (n-1) * (n-2) * ... * (1). \n Por ejemplo: factorial de 3 -> 6 \n             factorial de 0 -> 1")
 
-
-
 class p4(ABC):
 
     @abstractmethod
@@ -115,9 +112,8 @@ class p4(ABC):
             if "fibonacci" not in espacio_usuario:
                 raise NameError("⚠️ No se encontró la función 'fibonacci'.")
             funcion_usuario = espacio_usuario["fibonacci"]
-            assert funcion_usuario(5) == 120
-            assert funcion_usuario(0) == 1
-            assert funcion_usuario(3) == 6
+            assert funcion_usuario(5) == [0, 1, 1, 2, 3]
+            assert funcion_usuario(7) == [0, 1, 1, 2, 3, 5, 8]
         except AssertionError:
             print("❌ Error en la función fibonacci.")
         except Exception as e:
@@ -127,38 +123,58 @@ class p4(ABC):
 
     @staticmethod
     def hint():
-        print("Debes generar una función llamada 'fibonacci', que reciba una variable int() y despues debes retornar el valor de la multiplicación de n * (n-1) * (n-2) * ... * (1). \n Por ejemplo: factorial de 3 -> 6 \n             factorial de 0 -> 1")
+        print("Debes generar una función llamada 'fibonacci', que retorne los primeros N números de la serie Fibonacci.")
 
+class p5(ABC):
 
+    @abstractmethod
+    def es_palindromo(self, palabra):
+        pass
 
+    @staticmethod
+    def check():
+        try:
+            espacio_usuario = get_ipython().user_ns
+            if "es_palindromo" not in espacio_usuario:
+                raise NameError("⚠️ No se encontró la función 'es_palindromo'.")
+            funcion_usuario = espacio_usuario["es_palindromo"]
+            assert funcion_usuario("oso") == True
+            assert funcion_usuario("python") == False
+            assert funcion_usuario("ana") == True
+        except AssertionError:
+            print("❌ Error en la función es_palindromo.")
+        except Exception as e:
+            print(f"❌ Error: {e}")
+        else:
+            print("✅ Función correcta.")
 
+    @staticmethod
+    def hint():
+        print("Debes generar una función llamada 'es_palindromo', que retorne True si una palabra es igual al revés.")
 
-# Problema 4: Fibonacci
-print("\n# Problema 4: Escribe una función que retorne los primeros N números de la serie Fibonacci.")
-def fibonacci(n):
-    pass  # Completa esta función
+class p6(ABC):
 
-# Pruebas
-assert fibonacci(5) == [0, 1, 1, 2, 3]
-assert fibonacci(7) == [0, 1, 1, 2, 3, 5, 8]
+    @abstractmethod
+    def suma_digitos(self, numero):
+        pass
 
-# Problema 5: Palíndromos
-print("\n# Problema 5: Escribe una función que determine si una palabra es un palíndromo.")
-def es_palindromo(palabra):
-    pass  # Completa esta función
+    @staticmethod
+    def check():
+        try:
+            espacio_usuario = get_ipython().user_ns
+            if "suma_digitos" not in espacio_usuario:
+                raise NameError("⚠️ No se encontró la función 'suma_digitos'.")
+            funcion_usuario = espacio_usuario["suma_digitos"]
+            assert funcion_usuario(123) == 6
+            assert funcion_usuario(456) == 15
+            assert funcion_usuario(789) == 24
+        except AssertionError:
+            print("❌ Error en la función suma_digitos.")
+        except Exception as e:
+            print(f"❌ Error: {e}")
+        else:
+            print("✅ Función correcta.")
 
-# Pruebas
-assert es_palindromo("oso") == True
-assert es_palindromo("python") == False
-assert es_palindromo("ana") == True
-
-
-# Problema 6: Suma de dígitos
-print("\n# Problema 6: Escribe una función que calcule la suma de los dígitos de un número entero positivo.")
-def suma_digitos(numero):
-    pass  # Completa esta función
-
-# Pruebas
-assert suma_digitos(123) == 6
-assert suma_digitos(456) == 15
-assert suma_digitos(789) == 24
+    @staticmethod
+    def hint():
+        print("Debes generar una función llamada 'suma_digitos', que sume todos los dígitos de un número entero positivo.")
