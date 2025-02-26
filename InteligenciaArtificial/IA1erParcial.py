@@ -4,7 +4,15 @@ import matplotlib.pyplot as plt
 from abc import ABC, abstractmethod
 from google.colab import files
 from IPython.display import display
-from PIL import Image as PILImage
+from PIL import Image as PILImage    
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.model_selection import GridSearchCV
 
 
 def requisitos():
@@ -28,15 +36,6 @@ def requisitos():
             print(f"{lib} instalada correctamente ✅")
     
     # Ahora importamos todas las librerías necesarias
-    from sklearn.model_selection import train_test_split
-    from sklearn.linear_model import LogisticRegression
-    from sklearn.ensemble import RandomForestClassifier
-    from sklearn.pipeline import Pipeline
-    from sklearn.preprocessing import StandardScaler
-    from sklearn.metrics import accuracy_score, classification_report
-    from sklearn.model_selection import GridSearchCV
-    import qrcode
-    from PIL import Image as PILImage
     
     print("✅ Todas las librerías han sido importadas correctamente.")
 
@@ -210,7 +209,7 @@ class p1(ABC):
         print("La función debe calcular la venta total de cada producto y graficar la evolución mensual de las ventas totales.")
 
 class p2(ABC):
-    from sklearn.datasets import load_iris
+
     @abstractmethod
     def clasificar_iris(self):
         pass
