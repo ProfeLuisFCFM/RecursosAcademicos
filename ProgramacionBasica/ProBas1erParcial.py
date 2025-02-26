@@ -1,6 +1,8 @@
 import subprocess, sys, time
 from abc import ABC, abstractmethod
 from google.colab import files
+from IPython.display import display
+from PIL import Image as PILImage
 
 def requisitos():
     libraries = [
@@ -47,6 +49,8 @@ def QR_Generator():
     qr.save(output_filename)
     print(f"Código QR generado y guardado como {output_filename}")
     files.download('qr_resultados.png')
+    img = PILImage.open(output_filename)
+    display(img)
 
 class p1(ABC):
 
