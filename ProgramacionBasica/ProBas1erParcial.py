@@ -21,6 +21,17 @@ def requisitos():
 requisitos()
 
 def QR_Generator():
+        # Obtener variables del espacio de nombres en Colab
+    espacio_usuario = get_ipython().user_ns
+
+    try:
+        Nombre = espacio_usuario["Nombre"]
+        Matricula = espacio_usuario["Matricula"]
+        Grupo = espacio_usuario["Grupo"]
+    except KeyError as e:
+        raise NameError(f"⚠️ La variable '{e.args[0]}' no está definida en el notebook. Asegúrate de ejecutarla antes.") 
+
+   
     resultados = {}
     examen = {
         "datos_alumno": {
