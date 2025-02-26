@@ -210,7 +210,7 @@ class p1(ABC):
         print("La función debe calcular la venta total de cada producto y graficar la evolución mensual de las ventas totales.")
 
 class p2(ABC):
-
+    from sklearn.datasets import load_iris
     @abstractmethod
     def clasificar_iris(self):
         pass
