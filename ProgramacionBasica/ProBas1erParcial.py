@@ -35,6 +35,32 @@ def QR_Generator():
 
    
     resultados = {}
+
+    try:
+        # Pruebas diferentes a las de las clases
+        invertir_cadena = espacio_usuario["invertir_cadena"]
+        resultados["invertir_cadena"] = invertir_cadena("computadora") == "arodatupmoc"
+
+        es_primo = espacio_usuario["es_primo"]
+        resultados["es_primo"] = es_primo(29) == True and es_primo(10) == False
+
+        factorial = espacio_usuario["factorial"]
+        resultados["factorial"] = factorial(4) == 24 and factorial(6) == 720
+
+        fibonacci = espacio_usuario["fibonacci"]
+        resultados["fibonacci"] = fibonacci(8) == [0, 1, 1, 2, 3, 5, 8, 13]
+
+        es_palindromo = espacio_usuario["es_palindromo"]
+        resultados["es_palindromo"] = es_palindromo("radar") == True and es_palindromo("mesa") == False
+
+        suma_digitos = espacio_usuario["suma_digitos"]
+        resultados["suma_digitos"] = suma_digitos(321) == 6 and suma_digitos(987) == 24
+
+    except KeyError as e:
+        raise NameError(f"⚠️ La función '{e.args[0]}' no está definida en el notebook.")
+    except Exception as e:
+        raise RuntimeError(f"⚠️ Error en la ejecución de una función: {e}")
+
     examen = {
         "datos_alumno": {
             "nombre": Nombre,
