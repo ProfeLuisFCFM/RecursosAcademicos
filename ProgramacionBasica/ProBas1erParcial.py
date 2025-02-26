@@ -70,7 +70,7 @@ def QR_Generator():
         "respuestas": resultados,
         "fecha": int(time.time())
     }
-    qr = qrcode.make(examen, border=0)
+    qr = qrcode.make(examen)
     output_filename = "qr_resultados.png"
     qr.save(output_filename)
     print(f"Código QR generado y guardado como {output_filename}")
