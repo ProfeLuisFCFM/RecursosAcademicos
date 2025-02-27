@@ -91,7 +91,7 @@ def QR_Generator():
         })
         df_p1.to_csv("p1.csv", index=False)
         try:
-            analizar_ventas("p1.csv")
+            analizar_ventas("p1.csv", visible=False)
             resultados["p1_analizar_ventas"] = True
         except Exception:
             resultados["p1_analizar_ventas"] = False
@@ -152,7 +152,7 @@ def QR_Generator():
 class p1(ABC):
 
     @abstractmethod
-    def analizar_ventas(self, csv_file):
+    def analizar_ventas(self, csv_file, visible=True):
         pass
 
     @staticmethod
