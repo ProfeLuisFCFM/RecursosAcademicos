@@ -175,27 +175,13 @@ class p1(ABC):
             with open(csv_test, "w") as f:
                 f.write(data)
 
-            # Leer CSV antes de llamar la función
             df = pd.read_csv(csv_test)
-            #venta_total_esperada = (df['Cantidad'] * df['Precio']).sum()
             df['Venta_Total'] = df['Cantidad'] * df['Precio']
             venta_total_esperada = df.groupby('Producto')['Venta_Total'].sum().idxmax()
-
-            # Ejecutar la función
-            #funcion_usuario(csv_test, visible=False)
-
-            # Leer CSV después de llamar la función
-            #df['Venta_Total'] = df['Cantidad'] * df['Precio']
-            #venta_total_calculada = df['Venta_Total'].sum()
-
-            # Leer CSV después de llamar la función
-            #df['Venta_Total'] = df['Cantidad'] * df['Precio']
             venta_total_calculada = funcion_usuario('p1.csv', visible=False)
 
-            # Eliminar el archivo de prueba
             os.remove(csv_test)
 
-            # Assertions
             assert venta_total_calculada == venta_total_esperada, "❌ Error en el cálculo de ventas totales."
 
         except FileNotFoundError:
@@ -227,24 +213,14 @@ class p2(ABC):
             
             funcion_usuario = espacio_usuario["clasificar_iris"]
 
-            # Cargar datos y ejecutar la función
             data = load_iris()
             X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.2, random_state=42)
 
-            # Entrenar un modelo de referencia
             model_ref = LogisticRegression(max_iter=200)
             model_ref.fit(X_train, y_train)
             y_pred_ref = model_ref.predict(X_test)
             acc_ref = accuracy_score(y_test, y_pred_ref)
 
-            # Capturar la salida de la función del usuario
-            #funcion_usuario()
-            
-            # Assertions
-            #model_user = LogisticRegression(max_iter=200)
-            #model_user.fit(X_train, y_train)
-            #y_pred_user = model_user.predict(X_test)
-            #acc_user = accuracy_score(y_test, y_pred_user)
             acc_user = funcion_usuario()
 
             assert acc_user >= acc_ref * 0.9, "❌ La precisión del modelo es significativamente menor de lo esperado."
@@ -290,6 +266,7 @@ class p3(ABC):
 
             # Leer CSV antes de la ejecución
             df = pd.read_csv(csv_test)
+            df.replace(["NaN", "nan", "None", ""], np.nan, inplace=True)
             if 'Compra' in df.columns:
                 correlation_test = df.corr()['Compra'].sort_values(ascending=False)
             correlation_p3 = funcion_usuario('p3.csv')
