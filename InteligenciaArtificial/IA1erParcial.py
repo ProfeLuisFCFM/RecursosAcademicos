@@ -40,8 +40,6 @@ def requisitos():
     
     print("✅ Todas las librerías han sido importadas correctamente.")
 
-requisitos()
-
 def generar_csvs():
     # p1.csv - Datos de ventas
     data_p1 = pd.DataFrame({
@@ -65,6 +63,8 @@ def generar_csvs():
     # p4.csv - No se necesita un CSV (datos de sklearn)
 
     print("✅ Archivos CSV generados correctamente.")
+
+requisitos()
 
 generar_csvs()
 
