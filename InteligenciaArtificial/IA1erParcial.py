@@ -177,7 +177,8 @@ class p1(ABC):
 
             # Leer CSV antes de llamar la función
             df = pd.read_csv(csv_test)
-            venta_total_esperada = (df['Cantidad'] * df['Precio']).sum()
+            #venta_total_esperada = (df['Cantidad'] * df['Precio']).sum()
+            venta_total_esperada = df.groupby('Producto')['Venta_Total'].sum().idxmax()
 
             # Ejecutar la función
             #funcion_usuario(csv_test, visible=False)
