@@ -84,46 +84,74 @@ def QR_Generator():
     try:
         # Prueba para p1 (analizar_ventas)
         analizar_ventas = espacio_usuario["analizar_ventas"]
-        df_p1 = pd.DataFrame({
-            "Fecha": ["2024-01-01", "2024-01-05", "2024-02-10", "2024-02-15"],
-            "Producto": ["ProductoA", "ProductoB", "ProductoA", "ProductoB"],
-            "Cantidad": [10, 5, 3, 7],
-            "Precio": [20, 50, 20, 50]
-        })
-        df_p1.to_csv("p1.csv", index=False)
         try:
-            analizar_ventas("p1.csv", visible=False)
-            resultados["p1_analizar_ventas"] = True
+            df = pd.read_csv('p1.csv')
+            df['Venta_Total'] = df['Cantidad'] * df['Precio']
+            venta_total_esperada = df.groupby('Producto')['Venta_Total'].sum().idxmax()
+            if venta_total_esperada == analizar_ventas("p1.csv", visible=False):
+                resultados["p1_analizar_ventas"] = True
+            else:
+                resultados["p1_analizar_ventas"] = False
         except Exception:
             resultados["p1_analizar_ventas"] = False
 
         # Prueba para p2 (clasificar_iris)
         clasificar_iris = espacio_usuario["clasificar_iris"]
         try:
-            clasificar_iris()
-            resultados["p2_clasificar_iris"] = True
+            data = load_iris()
+            X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.2, random_state=42)
+            model_ref = LogisticRegression(max_iter=200)
+            model_ref.fit(X_train, y_train)
+            y_pred_ref = model_ref.predict(X_test)
+            acc_ref = accuracy_score(y_test, y_pred_ref)
+            if clasificar_iris() >= acc_ref * 0.9:
+                resultados["p2_clasificar_iris"] = True
+            else: 
+                resultados["p2_clasificar_iris"] = False
         except Exception:
             resultados["p2_clasificar_iris"] = False
 
         # Prueba para p3 (manejar_datos)
         manejar_datos = espacio_usuario["manejar_datos"]
-        df_p3 = pd.DataFrame({
-            "Edad": [25, 30, 35, None, 40],
-            "Salario": [50000, None, 60000, 55000, 65000],
-            "Compra": [1, 0, 1, 0, 1]
-        })
-        df_p3.to_csv("p3.csv", index=False)
         try:
-            manejar_datos("p3.csv")
-            resultados["p3_manejar_datos"] = True
+            df = pd.read_csv('p3.csv')
+            df.replace(["NaN", "nan", "None", ""], np.nan, inplace=True)
+            df = df.map(lambda x: str(x).strip() if isinstance(x, str) else x)
+            for col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors='coerce')
+            df.fillna(df.mean(numeric_only=True), inplace=True)
+            df = pd.get_dummies(df, drop_first=True)
+            if 'Compra' in df.columns:
+                correlation_test = df.corr()['Compra'].sort_values(ascending=False)
+            correlation = manejar_datos("p3.csv")
+            if correlation.equals(correlation_test):
+                resultados["p3_manejar_datos"] = True
+            else:
+                resultados["p3_manejar_datos"] = False
         except Exception:
             resultados["p3_manejar_datos"] = False
 
         # Prueba para p4 (optimizar_modelo)
         optimizar_modelo = espacio_usuario["optimizar_modelo"]
         try:
-            optimizar_modelo()
-            resultados["p4_optimizar_modelo"] = True
+            data = load_iris()
+            X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.2, random_state=42)
+            pipeline_ref = Pipeline([
+                ('scaler', StandardScaler()),
+                ('clf', RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42))
+            ])
+            pipeline_ref.fit(X_train, y_train)
+            param_grid = {
+                'clf__n_estimators': [50, 100, 200],
+                'clf__max_depth': [None, 10, 20, 30]
+            }
+            grid_ref = GridSearchCV(pipeline_ref, param_grid, cv=5)
+            grid_ref.fit(X_train, y_train)
+            best_params_ref = grid_ref.best_params_
+            if best_params_ref == optimizar_modelo():
+                resultados["p4_optimizar_modelo"] = True
+            else:
+                resultados["p4_optimizar_modelo"] = False
         except Exception:
             resultados["p4_optimizar_modelo"] = False
 
@@ -132,7 +160,6 @@ def QR_Generator():
     except Exception as e:
         raise RuntimeError(f"⚠️ Error en la ejecución de una función: {e}")
 
-    # Datos a almacenar en el QR
     examen = {
         "datos_alumno": {
             "nombre": Nombre,
@@ -324,16 +351,12 @@ class p4(ABC):
             data = load_iris()
             X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.2, random_state=42)
 
-            # Ejecutar la función del usuario
-            #funcion_usuario()
-
             # Modelo de referencia para comparación
             pipeline_ref = Pipeline([
                 ('scaler', StandardScaler()),
                 ('clf', RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42))
             ])
             pipeline_ref.fit(X_train, y_train)
-            #acc_ref = pipeline_ref.score(X_test, y_test)
 
             # Entrenar con GridSearchCV para obtener los mejores parámetros
             param_grid = {
@@ -344,9 +367,6 @@ class p4(ABC):
             grid_ref.fit(X_train, y_train)
             best_params_ref = grid_ref.best_params_
 
-            # Assertions
-            #assert acc_ref >= 0.8, "❌ Error: La precisión del modelo es inferior al 80%."
-            #assert isinstance(best_params_ref, dict), "❌ Error: No se encontraron los mejores parámetros del GridSearch."
             assert best_params_ref == funcion_usuario(), "❌ Error: No se encontraron los mejores parámetros del GridSearch."
 
         except AssertionError as e:
