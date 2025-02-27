@@ -180,7 +180,7 @@ class p1(ABC):
             venta_total_esperada = (df['Cantidad'] * df['Precio']).sum()
 
             # Ejecutar la función
-            funcion_usuario(csv_test)
+            funcion_usuario(csv_test, visible=False)
 
             # Leer CSV después de llamar la función
             df['Venta_Total'] = df['Cantidad'] * df['Precio']
