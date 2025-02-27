@@ -1,18 +1,18 @@
-import sys, subprocess, os
+import sys, subprocess, os, time
 import pandas as pd
 import matplotlib.pyplot as plt
 from abc import ABC, abstractmethod
 from google.colab import files
 from IPython.display import display
 from PIL import Image as PILImage    
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score, classification_report
-from sklearn.model_selection import GridSearchCV
+#from sklearn.datasets import load_iris
+#from sklearn.model_selection import train_test_split
+#from sklearn.linear_model import LogisticRegression
+#from sklearn.ensemble import RandomForestClassifier
+#from sklearn.pipeline import Pipeline
+#from sklearn.preprocessing import StandardScaler
+#from sklearn.metrics import accuracy_score, classification_report
+#from sklearn.model_selection import GridSearchCV
 
 
 def requisitos():
