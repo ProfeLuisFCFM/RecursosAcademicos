@@ -180,11 +180,15 @@ class p1(ABC):
             venta_total_esperada = (df['Cantidad'] * df['Precio']).sum()
 
             # Ejecutar la función
-            funcion_usuario(csv_test, visible=False)
+            #funcion_usuario(csv_test, visible=False)
 
             # Leer CSV después de llamar la función
-            df['Venta_Total'] = df['Cantidad'] * df['Precio']
-            venta_total_calculada = df['Venta_Total'].sum()
+            #df['Venta_Total'] = df['Cantidad'] * df['Precio']
+            #venta_total_calculada = df['Venta_Total'].sum()
+
+            # Leer CSV después de llamar la función
+            #df['Venta_Total'] = df['Cantidad'] * df['Precio']
+            venta_total_calculada = funcion_usuario('p1.csv', visible=False)
 
             # Eliminar el archivo de prueba
             os.remove(csv_test)
@@ -232,13 +236,14 @@ class p2(ABC):
             acc_ref = accuracy_score(y_test, y_pred_ref)
 
             # Capturar la salida de la función del usuario
-            funcion_usuario()
+            #funcion_usuario()
             
             # Assertions
-            model_user = LogisticRegression(max_iter=200)
-            model_user.fit(X_train, y_train)
-            y_pred_user = model_user.predict(X_test)
-            acc_user = accuracy_score(y_test, y_pred_user)
+            #model_user = LogisticRegression(max_iter=200)
+            #model_user.fit(X_train, y_train)
+            #y_pred_user = model_user.predict(X_test)
+            #acc_user = accuracy_score(y_test, y_pred_user)
+            acc_user = funcion_usuario()
 
             assert acc_user >= acc_ref * 0.9, "❌ La precisión del modelo es significativamente menor de lo esperado."
 
@@ -283,21 +288,23 @@ class p3(ABC):
 
             # Leer CSV antes de la ejecución
             df = pd.read_csv(csv_test)
-            nan_count_before = df.isna().sum().sum()
-
+            if 'Compra' in df.columns:
+                correlation_test = df.corr()['Compra'].sort_values(ascending=False)
+            correlation_p3 = funcion_usuario('p3.csv')
             # Ejecutar la función
-            funcion_usuario(csv_test)
+            #funcion_usuario('p3.csv')
 
             # Leer CSV después de la ejecución
-            df = pd.read_csv(csv_test)
-            nan_count_after = df.isna().sum().sum()
+            #df = pd.read_csv(csv_test)
+            #nan_count_after = df.isna().sum().sum()
 
             # Eliminar el archivo de prueba
             os.remove(csv_test)
 
             # Assertions
-            assert nan_count_after == 1, f"❌ Error: No se llenaron correctamente los valores nulos.{nan_count_after}"
-            assert "Compra" in df.columns, "❌ Error: La columna 'Compra' no se encuentra en el dataframe."
+            #assert nan_count_after == 1, f"❌ Error: No se llenaron correctamente los valores nulos.{nan_count_after}"
+            #assert "Compra" in df.columns, "❌ Error: La columna 'Compra' no se encuentra en el dataframe."
+            assert correlation_p3 == correlation_test, "❌ Error: La correlación no corresponde."
 
         except FileNotFoundError:
             print("❌ Error: No se encontró el archivo CSV.")
@@ -333,7 +340,7 @@ class p4(ABC):
             X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.2, random_state=42)
 
             # Ejecutar la función del usuario
-            funcion_usuario()
+            #funcion_usuario()
 
             # Modelo de referencia para comparación
             pipeline_ref = Pipeline([
@@ -341,7 +348,7 @@ class p4(ABC):
                 ('clf', RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42))
             ])
             pipeline_ref.fit(X_train, y_train)
-            acc_ref = pipeline_ref.score(X_test, y_test)
+            #acc_ref = pipeline_ref.score(X_test, y_test)
 
             # Entrenar con GridSearchCV para obtener los mejores parámetros
             param_grid = {
@@ -353,8 +360,9 @@ class p4(ABC):
             best_params_ref = grid_ref.best_params_
 
             # Assertions
-            assert acc_ref >= 0.8, "❌ Error: La precisión del modelo es inferior al 80%."
-            assert isinstance(best_params_ref, dict), "❌ Error: No se encontraron los mejores parámetros del GridSearch."
+            #assert acc_ref >= 0.8, "❌ Error: La precisión del modelo es inferior al 80%."
+            #assert isinstance(best_params_ref, dict), "❌ Error: No se encontraron los mejores parámetros del GridSearch."
+            assert best_params_ref == funcion_usuario(), "❌ Error: No se encontraron los mejores parámetros del GridSearch."
 
         except AssertionError as e:
             print(e)
