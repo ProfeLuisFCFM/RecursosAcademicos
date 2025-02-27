@@ -289,7 +289,7 @@ class p3(ABC):
             # Assertions
             #assert nan_count_after == 1, f"❌ Error: No se llenaron correctamente los valores nulos.{nan_count_after}"
             #assert "Compra" in df.columns, "❌ Error: La columna 'Compra' no se encuentra en el dataframe."
-            assert correlation_p3 == correlation_test, "❌ Error: La correlación no corresponde."
+            assert correlation_p3.equals(correlation_test), "❌ Error: La correlación no corresponde."
 
         except FileNotFoundError:
             print("❌ Error: No se encontró el archivo CSV.")
