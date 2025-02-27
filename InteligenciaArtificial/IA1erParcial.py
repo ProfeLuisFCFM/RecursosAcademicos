@@ -268,6 +268,11 @@ class p3(ABC):
             # Leer CSV antes de la ejecución
             df = pd.read_csv(csv_test)
             df.replace(["NaN", "nan", "None", ""], np.nan, inplace=True)
+            df = df.map(lambda x: str(x).strip() if isinstance(x, str) else x)
+            for col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors='coerce')
+            df.fillna(df.mean(numeric_only=True), inplace=True)
+            df = pd.get_dummies(df, drop_first=True)
             if 'Compra' in df.columns:
                 correlation_test = df.corr()['Compra'].sort_values(ascending=False)
             correlation_p3 = funcion_usuario('p3.csv')
