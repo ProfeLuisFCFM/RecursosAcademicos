@@ -3,6 +3,7 @@
 
 import numpy as np
 from scipy.optimize import linprog
+import sympy as sp
 
 # Problema 1: Producción de sombreros en Wild West
 def optimizar_sombreros():
@@ -23,6 +24,33 @@ def optimizar_chemlabs():
     print("Producción óptima de soluciones A y B:", resultado.x)
 
 # Problema 3: Multiplicadores de Lagrange y KKT (teórico, resolver aparte)
+def multiplicadores_lagrange_kkt():
+    # Definir las variables y los multiplicadores
+    x, y, lam1, lam2 = sp.symbols('x y lam1 lam2')
+    
+    # Función objetivo: f(x, y) = x^2 + y^2
+    f = x**2 + y**2
+    
+    # Restricciones:
+    # g1: x + y - 1 = 0
+    # g2: x - y = 0
+    g1 = x + y - 1
+    g2 = x - y
+    
+    # Construir la función Lagrangiana:
+    # L(x, y, lam1, lam2) = f(x, y) - lam1*g1 - lam2*g2
+    L = f - lam1 * g1 - lam2 * g2
+    
+    # Calcular las derivadas parciales (condiciones de primer orden)
+    eq1 = sp.diff(L, x)    # ∂L/∂x = 0
+    eq2 = sp.diff(L, y)    # ∂L/∂y = 0
+    eq3 = sp.diff(L, lam1) # ∂L/∂lam1 = 0  (la restricción g1)
+    eq4 = sp.diff(L, lam2) # ∂L/∂lam2 = 0  (la restricción g2)
+    
+    # Resolver el sistema de ecuaciones
+    solucion = sp.solve([eq1, eq2, eq3, eq4], (x, y, lam1, lam2), dict=True)
+    return solucion
+
 
 # Problema 4: Cálculo del determinante de una matriz 4x4
 def calcular_determinante(matriz):
