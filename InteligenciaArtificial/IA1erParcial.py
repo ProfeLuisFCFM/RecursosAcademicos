@@ -68,6 +68,7 @@ def generar_csvs():
 generar_csvs()
 
 def QR_Generator():
+    import qrcode 
     espacio_usuario = get_ipython().user_ns
 
     try:
@@ -140,14 +141,11 @@ def QR_Generator():
         "respuestas": resultados,
         "fecha": int(time.time())
     }
-
     qr = qrcode.make(examen)
     output_filename = "qr_resultados.png"
     qr.save(output_filename)
     print(f"Código QR generado y guardado como {output_filename}")
     files.download('qr_resultados.png')
-
-    # Mostrar QR
     img = PILImage.open(output_filename)
     display(img)
 
