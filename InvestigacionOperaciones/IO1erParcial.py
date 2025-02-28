@@ -162,8 +162,8 @@ class p1(ABC):
             
             # Definir los parámetros esperados
             c = [-8, -5]  # Coeficientes de la función objetivo (maximizar utilidad)
-            A = [[2, 1], [-1, 0], [0, -1]]  # Restricciones
-            b = [350, -750, -600]
+            A = [[2, 1], [1, 0], [0, 1]]  # Restricciones
+            b = [350, 750, 600]
             bounds = [(0, None), (0, None)]  # Variables no negativas
             
             # Resolver con scipy.optimize.linprog
