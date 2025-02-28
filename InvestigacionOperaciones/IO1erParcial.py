@@ -52,8 +52,8 @@ def QR_Generator():
         try:
             # Definir los parámetros esperados para p1
             c = [-8, -5]  
-            A = [[2, 1], [-1, 0], [0, -1]]  
-            b = [350, -750, -600]
+            A = [[2, 1], [1, 0], [0, 1]]  
+            b = [350, 750, 600]
             bounds = [(0, None), (0, None)]  
             
             resultado_esperado = linprog(c, A_ub=A, b_ub=b, bounds=bounds, method='highs').x
