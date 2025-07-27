@@ -2,8 +2,7 @@
 \usepackage[spanish]{babel} % Traduce elementos automáticos (como fechas, títulos) al español
 
 \usepackage{epsfig,graphicx} % Para insertar y manejar imágenes
-%\usepackage[left=2cm,right=2cm,top=1.8cm,bottom=2.3cm]{geometry} % Márgenes del documento
-\usepackage[margin=0.5in]{geometry}
+\usepackage[left=2cm,right=2cm,top=1.8cm,bottom=2.3cm]{geometry} % Márgenes del documento
 \usepackage{array} % Mejora el control de tablas
 \usepackage{tabularx} % Tablas con ancho automático ajustable
 \usepackage{multicol} % Permite múltiples columnas en el texto
@@ -20,8 +19,7 @@
 \usepackage{lastpage} % Referencia a la última página del documento para numeración
 
 \pagestyle{fancy}
-\renewcommand{\headrulewidth}{0pt} % <-- elimina la línea superior
-\fancyhf{} % limpia encabezados y pies de página
+\fancyhf{}
 \rfoot{\textit{Página \thepage \hspace{1pt} de \pageref{LastPage}}}
 
 \usepackage{lipsum} % Genera texto de prueba (Lorem Ipsum)
@@ -83,23 +81,20 @@
 % #2 = Grupo o sección
 % #3 = Título del trabajo
 % #4 = Fecha o información adicional
-% #5 = color o byn
-\newcommand{\cabecera}[5]{%
+\newcommand{\cabecera}[4]{%
 \noindent\makebox[\textwidth][c]{%
-    \begin{minipage}{3cm}
-        \vspace{-6mm}
+	\begin{minipage}{3cm}
+		\vspace{-6mm}
         \centering
-        \ifthenelse{\equal{#5}{byn}}
-            {\includegraphics[height=1in]{UANL.eps}}
-            {\includegraphics[height=1in]{UANL_color.eps}}%
+        \includegraphics[height=3.4cm]{UANL.eps} % Logo izquierdo
         \vspace{1mm}
     \end{minipage}
     \hspace{0.5cm} % Espaciado entre columnas
-    \begin{minipage}{10cm}
-        \vspace{-6mm}
+    \begin{minipage}{9cm}
+    	\vspace{-6mm}
         \centering
-        \textbf{\Large Universidad Autónoma de Nuevo León}\\[0.1cm]
-        \textbf{\large Facultad de Ciencias Físico Matemáticas}\\[0.3cm]
+        \textbf{\large Universidad Autónoma de Nuevo León}\\[0.1cm]
+        \textbf{Facultad de Ciencias Físico Matemáticas}\\[0.1cm]
         \textbf{#1 $\vert$ #2}\\[0.1cm]
         #3\\[0.1cm]
         #4\\[0.1cm]
@@ -107,14 +102,11 @@
     \end{minipage}
     \hspace{0.5cm}
     \begin{minipage}{3cm}
-        \vspace{-6mm}
+	    \vspace{-6mm}
         \centering
-        \ifthenelse{\equal{#5}{byn}}
-            {\includegraphics[height=1in]{FCFM.eps}}
-            {\includegraphics[height=1in]{FCFM_color.eps}}%
+        \includegraphics[height=3.4cm]{FCFM.eps} % Logo derecho
         \vspace{1mm}
     \end{minipage}
 }%
 }
-
 
